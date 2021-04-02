@@ -11,7 +11,7 @@ import org.junit.Test;
  * Unit test for simple App.
  */
 public class NASortTest {
-  public Comparator<String> comparator = new NASort(true);
+  public Comparator<String> comparator = new NASort();
 
   /**
    * Numbers come before characters.
@@ -126,19 +126,19 @@ public class NASortTest {
    */
   @Test
   public void comparingComplexNumber() {
-    printArr(nasort(new String[] { "10.0401", "10.022", "10.042", "10.021999" }));
     assertArrayEquals(
         nasort(new String[] { "10.0401", "10.022", "10.042", "10.021999" }),
         new String[] { "10.021999", "10.022", "10.0401", "10.042" });
     assertArrayEquals(nasort(new String[] { "-1", "-2", "4", "-3", "0", "-5" }),
         new String[] { "-5", "-3", "-2", "-1", "0", "4" });
-    assertArrayEquals(nasort(new String[] { "0001", "002", "001" }), new String[] { "0001", "001", "002" });
+    assertArrayEquals(nasort(new String[] { "0001", "002", "001", "1" }), new String[] { "0001", "001", "1", "002" });
     assertArrayEquals(
         nasort(new String[] { "1.528535047e5", "1.528535047e7", "1.52e15", "1.528535047e3", "1.59e-3" }),
         new String[] { "1.59e-3", "1.528535047e3", "1.528535047e5", "1.528535047e7", "1.52e15" });
     assertArrayEquals(
         nasort(new String[] { "-1", "-2", "4", "-3", "0", "-5" }),
         new String[] { "-5", "-3", "-2", "-1", "0", "4" });
+    printArr(nasort(new String[] { "0xA", "0x9", "0x99" }));
     assertArrayEquals(nasort(new String[] { "0xA", "0x9", "0x99" }), new String[] { "0x9", "0xA", "0x99" });
     assertArrayEquals(
         nasort(new String[] { "0xZZ", "0xVVV", "0xVEV", "0xUU" }),
@@ -159,7 +159,7 @@ public class NASortTest {
     assertArrayEquals(
         nasort(new String[] { "A", "C", "E", "b", "d", "f" }),
         new String[] { "A", "b", "C", "d", "E", "f" });
-    Comparator<String> sensitiveComparator = new NASort(false);
+    Comparator<String> sensitiveComparator = new NASort(true);
     String[] arr1 = new String[] { "A", "C", "E", "b", "d", "f" };
     Arrays.sort(arr1, sensitiveComparator);
     assertArrayEquals(arr1, new String[] { "A", "C", "E", "b", "d", "f" });
@@ -173,6 +173,9 @@ public class NASortTest {
    */
   @Test
   public void complexCases() {
+    printArr(nasort(new String[] { "T78", "U17", "U10", "U12", "U14", "745", "U7", "01", "485", "S16", "S2", "S22", "1081",
+    "S25", "1055", "779", "776", "771", "44", "4", "87", "1091", "42", "480", "952", "951", "756", "1000",
+    "824", "770", "666", "633", "619", "1", "991", "77H", "PIER-7", "47", "29", "9", "77L", "433" }));
     assertArrayEquals(
         nasort(new String[] { "T78", "U17", "U10", "U12", "U14", "745", "U7", "01", "485", "S16", "S2", "S22", "1081",
             "S25", "1055", "779", "776", "771", "44", "4", "87", "1091", "42", "480", "952", "951", "756", "1000",
@@ -192,7 +195,7 @@ public class NASortTest {
             "bB", "aaA", "AaA", "aaa" }),
         new String[] { "9", "11", "22", "99", "A", "aa", "AA", "Aa", "aA", "aaA", "AaA", "aaa", "aaaa", "Aaaa", "aAaa",
             "BB", "bB", "bbbb" });
-    Comparator<String> sensitiveComparator = new NASort(false);
+    Comparator<String> sensitiveComparator = new NASort(true);
     String[] arr1 = new String[] { "9", "11", "22", "99", "A", "aaaa", "bbbb", "Aaaa", "aAaa", "aa", "AA", "Aa", "aA", "BB",
             "bB", "aaA", "AaA", "aaa" };
     Arrays.sort(arr1, sensitiveComparator);
@@ -202,6 +205,19 @@ public class NASortTest {
     assertArrayEquals(
         nasort(new String[] { "5D", "1A", "2D", "33A", "5E", "33K", "33D", "5S", "2C", "5C", "5F", "1D", "2M" }),
         new String[] { "1A", "1D", "2C", "2D", "2M", "5C", "5D", "5E", "5F", "5S", "33A", "33D", "33K" });
+  }
+
+  /**
+   * Reverse ordering
+   */
+  @Test
+  public void reverseComparingComplexNumber() {
+    assertArrayEquals(
+        reverseSort(new String[] { "10.0401", "10.022", "10.042", "10.021999" }),
+        new String[] { "10.042", "10.0401", "10.022", "10.021999" });
+    assertArrayEquals(reverseSort(new String[] { "-1", "-2", "4", "-3", "0", "-5" }),
+        new String[] { "4", "0", "-1", "-2", "-3", "-5" });
+    
   }
 
   // Util
@@ -214,6 +230,18 @@ public class NASortTest {
    */
   public String[] nasort(String[] arr) {
     Arrays.sort(arr, comparator);
+    return arr;
+  }
+
+  /**
+   * Helper method to perform NASort on input String in reverse.
+   * 
+   * @param arr input string array.
+   * @return NASorted string array.
+   */
+  public String[] reverseSort(String[] arr) {
+    Comparator<String> reverseComparator = new NASort(-1);
+    Arrays.sort(arr, reverseComparator);
     return arr;
   }
 

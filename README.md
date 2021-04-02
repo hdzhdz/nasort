@@ -6,9 +6,9 @@ Inspired by [***javascript-natural-sort***](https://www.npmjs.com/package/javasc
 
 #### Features
 - Numeric support ✅
-- Float support ❌
-- Float & decimal notation support ❌
-- Scientific notation support ❌
+- Float support ✅
+- Float & decimal notation support ✅
+- Scientific notation support ✅
 - IP addresses ✅
 - Filenames ✅
 - Dates sorting support ❌
@@ -16,7 +16,7 @@ Inspired by [***javascript-natural-sort***](https://www.npmjs.com/package/javasc
 - Movie Titles ✅
 - Padded zeros' numbers come first ✅
 - Case-sensitive/insensitive sorting ✅
-- Reverse ❌
+- Reverse ✅
 
 ## Usage  
 
@@ -26,11 +26,13 @@ Initiate and use:
 Comparator<String> sensitiveComparator = new NASort(false);
 String[] arr1 = new String[] { "A", "C", "E", "b", "d", "f" };
 Arrays.sort(arr1, sensitiveComparator);
-```
-To change case sensitivity:
+```  
+  
+To change case sensitivity:  
+
 ```java
-Comparator<String> sensitiveComparator = new NASort(false);
-Comparator<String> insensitiveComparator = new NASort(true);
+Comparator<String> sensitiveComparator = new NASort(true);
+Comparator<String> insensitiveComparator = new NASort(false);
 ```
 
 ## Examples  
@@ -89,4 +91,23 @@ Find more in the unit test.
 
 ```java
 { "1 Title - The Big Lebowski","1 Title - Gattaca","1 Title - Last Picture Show" } -> { "1 Title - Gattaca","1 Title - Last Picture Show","1 Title - The Big Lebowski" }
+```
+
+### Padded Zeros
+
+```java
+{ "0001", "002", "001", "1" } -> { "0001", "001", "1", "002" }
+```  
+
+### Case Sensitive
+
+```java
+{ "A", "b", "C", "d", "E", "f" } -> { "A", "C", "E", "b", "d", "f" }
+```
+
+### Reverse
+
+```java
+{ "10.0401", "10.022", "10.042", "10.021999" } -> { "10.042", "10.0401", "10.022", "10.021999" }
+{ "-1", "-2", "4", "-3", "0", "-5" } -> { "4", "0", "-1", "-2", "-3", "-5" }
 ```
