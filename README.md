@@ -4,19 +4,21 @@ Instead of sorting numbers in ASCII order like Java"s ***"Natural Order"*** (Lex
 
 Inspired by [***javascript-natural-sort***](https://www.npmjs.com/package/javascript-natural-sort).
 
-#### Features
-- Numeric support ✅
-- Float support ✅
-- Float & decimal notation support ✅
-- Scientific notation support ✅
-- IP addresses ✅
-- Filenames ✅
-- Dates sorting support ❌
-- Money ✅
-- Movie Titles ✅
-- Padded zeros' numbers come first ✅
-- Case-sensitive/insensitive sorting ✅
-- Reverse ✅
+| Features  |  Status |
+|:--|:-:|
+| Numeric support | ✅ |
+| Float support | ✅ |
+| Float & decimal notation support | ✅ |
+| Scientific notation support | ✅ |
+| IP addresses | ✅ |
+| Filenames | ✅ |
+| Dates sorting support | ❌ |
+| Money | ✅ |
+| Movie Titles | ✅ |
+| Padded zeros' numbers come first | ✅ |
+| Case-sensitive/insensitive sorting | ✅ |
+| Reverse | ✅ |
+
 
 ## Usage  
 
