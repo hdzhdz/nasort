@@ -11,7 +11,7 @@ import org.junit.Test;
  * Unit test for simple App.
  */
 public class NASortTest {
-  public Comparator<String> comparator = new NASort();
+  private Comparator<String> comparator = new NASort();
 
   /**
    * Numbers come before characters.

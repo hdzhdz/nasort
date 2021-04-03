@@ -19,6 +19,13 @@ Inspired by [***javascript-natural-sort***](https://www.npmjs.com/package/javasc
 | Case-sensitive/insensitive sorting | ✅ |
 | Reverse | ✅ |
 
+## Run time  
+
+| Amount of items  | 1000 | 10000 | 100000 | 1000000 | 10000000
+| :-- | :-: | :-: | :-: | :-: |:-: |
+| Java Int[] | 0ms | 1ms | 5ms | 84ms | 748ms|
+| Java String[] | 1ms | 15ms | 112ms | 524ms | 7124ms |
+| Natural Sort String[] | 90ms | 110ms | 428ms | 4256ms | 42638ms|  
 
 ## Usage  
 

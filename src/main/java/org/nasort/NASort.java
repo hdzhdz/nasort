@@ -58,30 +58,28 @@ class NASort implements Comparator<String> {
     // Comparing by Chunk
     List<String> o1Chunks = toChunk(o1);
     List<String> o2Chunks = toChunk(o2);
-    System.out.println("List 1 = " + o1Chunks.toString() + "; List 2 = " + o2Chunks.toString());
+    // System.out.println("List 1 = " + o1Chunks.toString() + "; List 2 = " + o2Chunks.toString());
     for (int i = 0; i < Math.min(o1Chunks.size(), o2Chunks.size()); i++) {
       String o1Chunk = o1Chunks.get(i);
       String o2Chunk = o2Chunks.get(i);
-      System.out.print("Chunk 1 = " + o1Chunk + "; Chunk 2 = " + o2Chunk + " -> ");
+      // System.out.print("Chunk 1 = " + o1Chunk + "; Chunk 2 = " + o2Chunk + " -> ");
       if (!o1Chunk.equals(o2Chunk)) {
         // if negative number
         // TODO: Interesting problem, with working around '-' because file 
         // "a-1.jpg" go before "a-2.jpg" while -1 > -2. Chunking negative will be different as well
         boolean o1Type = Character.isDigit(o1Chunk.charAt(0));
         boolean o2Type = Character.isDigit(o2Chunk.charAt(0));
-        System.out.println(isDouble);
-        System.out.println(isHex);
         // if different types or both string -> lexi order
         if (isDouble == -1 && isHex == -1 && (o1Type != o2Type || (o1Type == false && o2Type == false))) {
           isHex = 0; isDouble = 0;
-          System.out.println("LEXI ORDER");
+          // System.out.println("LEXI ORDER");
           if (caseSensitive) return o1Chunk.compareTo(o2Chunk);
           return o1Chunk.compareToIgnoreCase(o2Chunk) * order;
         } else {
           // Hex
           if (isHex == 1) {
             isHex = 0;
-            System.out.println("Hex ORDER");
+            // System.out.println("Hex ORDER");
             int o1Val = Integer.parseInt(o1Chunk, 16);
             int o2Val = Integer.parseInt(o2Chunk, 16);
             if (Integer.compare(o1Val, o2Val) == 0 && o1Chunk.length() != o2Chunk.length()) {
@@ -91,7 +89,7 @@ class NASort implements Comparator<String> {
           } else {
             // Double
             isDouble = 0;
-            System.out.println("DOUBLE ORDER");
+            // System.out.println("DOUBLE ORDER");
             double o1Val = Double.parseDouble(o1Chunk);
             double o2Val = Double.parseDouble(o2Chunk);
             if (Double.compare(o1Val, o2Val) == 0 && o1Chunk.length() != o2Chunk.length()) {
