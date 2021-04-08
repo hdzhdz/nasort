@@ -17,12 +17,16 @@ class NASort implements Comparator<String> {
   private int isHex = 0;
   private int order = 1;
 
+  /** 
+   * Create a comparator to naturally sort with case insensitive.
+   */
   public NASort() {
     caseSensitive = false;
   }
   
   /**
-   * Create a comparator to sort case sensitive or insensitive.
+   * Create a comparator to naturally sort case sensitive or 
+   * insensitive.
    * @param caseSensitive true = insensitive, false = sensitive.
    */
   public NASort(boolean caseSensitive) {

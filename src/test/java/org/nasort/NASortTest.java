@@ -21,6 +21,41 @@ public class NASortTest {
     assertArrayEquals(nasort(new String[] { "a", "1" }), new String[] { "1", "a" });
   }
 
+   /**
+   * Barcode ordering
+   */
+  @Test
+  public void comparingBarcodes() {
+    assertArrayEquals(
+        nasort(new String[] { "A1000", "A20", "ABC123", "ABB123", "AAA000", "A0", "ABC01", "ABC9999", "Z0" }),
+        new String[] { "A0", "A20", "A1000", "AAA000", "ABB123", "ABC01", "ABC123", "ABC9999", "Z0" });
+
+    /**
+     *  LOGMARS Military Standard MIL-STD-129N
+     *  Unit      Containers      Ammunition      DD Form
+     *  2320  -        01     -       371     -    9577
+    */
+    assertArrayEquals(nasort(new String[] { "2320-01-371-9577", "4567-45-418-4713", "7894-88-153-1456", "2320-45-418-4713",
+                                            "7894-88-153-4713", "7894-88-153-4713", "1000-00-000-0000", "1000-01-000-0000",
+                                            "1000-00-000-0001", "1000-00-000-0010", "1000-00-010-0000" }),
+        new String[] { "1000-00-000-0000", "1000-00-000-0001", "1000-00-000-0010", "1000-00-010-0000", "1000-01-000-0000",
+                       "2320-01-371-9577", "2320-45-418-4713", "4567-45-418-4713", "7894-88-153-1456", "7894-88-153-4713",
+                       "7894-88-153-4713" });
+
+    /**
+     * USPS Code
+     * ID + Left most digit of sequence number      Remaining 7 + Mod 10 check digit         Product ID
+     *                  EA1                                     23456784                          US
+     */
+    assertArrayEquals(nasort(new String[] { "EA1 23456784 US", "JH4 14567896 IO", "EA2 23456784 US", "EA2 91546214 CA",
+                                            "EA1 23456785 US", "EA1 23456785 CA", "000 00000000 AA", "001 00000000 AA",
+                                            "000 00000000 AZ", "000 00000100 AA", "001 01000001 AA", "001 00100000 AA",
+                                            "001 01000000 AA", "111 00000000 AA" }),
+        new String[] { "000 00000000 AA", "000 00000000 AZ", "000 00000100 AA", "001 00000000 AA", "001 00100000 AA",
+                       "001 01000000 AA", "001 01000001 AA", "111 00000000 AA", "EA1 23456784 US", "EA1 23456785 CA",
+                       "EA1 23456785 US", "EA2 23456784 US", "EA2 91546214 CA", "JH4 14567896 IO" });
+  }
+
   /**
    * Date and time ordering
    */
@@ -252,7 +287,7 @@ public class NASortTest {
   public void printArr(String[] arr) {
     System.out.print("{");
     for (int i = 0; i < arr.length - 1; i++) {
-      System.out.print(arr[i] +", ");
+      System.out.print("\"" + arr[i] + "\"" +", ");
     }
     System.out.println(arr[arr.length - 1] +"}");
   }

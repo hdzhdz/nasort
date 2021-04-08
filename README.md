@@ -6,13 +6,14 @@ Inspired by [***javascript-natural-sort***](https://www.npmjs.com/package/javasc
 
 | Features  |  Status |
 |:--|:-:|
-| Numeric support | ✅ |
-| Float support | ✅ |
-| Float & decimal notation support | ✅ |
-| Scientific notation support | ✅ |
+| Numeric | ✅ |
+| Float | ✅ |
+| Float & decimal notation | ✅ |
+| Scientific notation | ✅ |
+| Barcode | ✅ |
 | IP addresses | ✅ |
 | Filenames | ✅ |
-| Dates sorting support | ❌ |
+| Dates sorting | ❌ |
 | Money | ✅ |
 | Movie Titles | ✅ |
 | Padded zeros' numbers come first | ✅ |
@@ -72,6 +73,13 @@ Find more in the unit test.
 { "1.528535047e5","1.528535047e7","1.528535047e3" } -> { "1.528535047e3","1.528535047e5","1.528535047e7" }
 ```
 
+### Barcode
+
+```java
+{ "2320-01-371-9577", "4567-45-418-4713", "7894-88-153-1456", "2320-45-418-4713", "7894-88-153-4713", "7894-88-153-4713", "1000-00-000-0000", "1000-01-000-0000", "1000-00-000-0001", "1000-00-000-0010", "1000-00-010-0000" }
+->
+{ "1000-00-000-0000", "1000-00-000-0001", "1000-00-000-0010", "1000-00-010-0000", "1000-01-000-0000", "2320-01-371-9577", "2320-45-418-4713", "4567-45-418-4713", "7894-88-153-1456", "7894-88-153-4713", "7894-88-153-4713" }
+```
 ### IP addresses
 
 ```java
